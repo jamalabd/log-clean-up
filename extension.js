@@ -13,22 +13,20 @@ function activate(context) {
 			const selection = editor.selection;
 			// returns text from specific line
 			// next time work on iteration
-			console.log(document.lineCount);
-			const word = document.getText(selection);
-			const reversed = word.split('').reverse().join('');
-			editor.edit(editBuilder => {
-				editBuilder.delete(selection)
-				})
-			// for(let i = 0; document.lineCount >= i; i++){
-			// 	console.log(document.lineAt(i).text);
-			// 	if(document.lineAt(i).includes('console.log')){
-			// 		vscode.window.editor.edit	editBuilder => {
-			// 			editBuilder.delete(0, document.lineAt(i))
-			// 		})
-			// 	}
-			// }
 			
-
+			for (let index = 0; index <= document.lineCount; index++) {
+				if(document.lineAt(index).text.includes('console.log(')){
+					console.log('the index is ', index)
+					console.log('line at ',  document.lineAt(index)._line)
+					const start = document.lineAt(index)._line;
+					const end = document.lineAt(index)._line + 1; 
+					console.log(typeof start)
+					editor.edit(editBuilder => {
+						editBuilder.delete(new vscode.Range(start,0,end,0))
+						})
+				}
+				
+			}
 		}else{
 			console.log('editor not present')
 		}
