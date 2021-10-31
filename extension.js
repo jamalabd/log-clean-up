@@ -11,17 +11,15 @@ function activate(context) {
 		if(editor){
 			const document = editor.document;
 			const selection = editor.selection;
-			// returns text from specific line
-			// next time work on iteration
-			
+
 			for (let index = 0; index <= document.lineCount; index++) {
+
 				if(document.lineAt(index).text.includes('console.log(')){
-					console.log('the index is ', index)
-					console.log('line at ',  document.lineAt(index)._line)
 					const start = document.lineAt(index)._line;
 					const end = document.lineAt(index)._line + 1; 
-					console.log(typeof start)
+					console.log( document.lineAt(index)._line)
 					editor.edit(editBuilder => {
+					console.log(index, new vscode.Range(start,0,end,0))
 						editBuilder.delete(new vscode.Range(start,0,end,0))
 						})
 				}
